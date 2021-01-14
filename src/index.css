@@ -1,0 +1,84 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.app{
+  background-color: green;
+  background-size: cover;
+  background-position: bottom;
+}
+
+main{
+  min-height: 100vh;
+  color: white;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)) 
+}
+
+
+.date{
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 5px;
+  background-color: rgba(0,0,0,0.5);
+}
+.date-box{
+  position: absolute;
+  top: 0px;
+  border-radius: 0px, 0px, 15px, 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+
+.search{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 45px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top-left-radius: 10px;;
+  border-top-right-radius: 10px;
+  transition: 0.4s ease;
+  border: none;
+
+  color: black;
+  font-size: 20px;
+  text-align: center;
+}
+.search:hover{
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.search:focus{
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 55px;
+}
+
+
+
+.sunny{
+  background-image: url('./assets/weather-sunny.jpg');
+}
+.cloudy{
+  background-image: url('./assets/weather-cloudy.jpg');
+}
+.fog{
+  background-image: url('./assets/weather-fog.jpg');
+}
+.partlyCloudy{
+  background-image: url('./assets/weather-partlycloudy.jpg');
+}
+.warmRain{
+  background-image: url('./assets/weather-warmrain.jpg');
+}
+.coldRain{
+  background-image: url('./assets/weather-coldrain.jpg');
+}
+.thunder{
+  background-image: url('./assets/weather-thunder.jpg');
+}
+.snow{
+  background-image: url('./assets/weather-snow.jpg');
+}
