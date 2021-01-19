@@ -94,6 +94,8 @@ function App() {
         .then(result => {
           setForecast(result);
         });
+
+        
       
       }
     };
