@@ -65,6 +65,7 @@ function App() {
     "cod": 200
     
   });
+  const [forecast, setForecast] = useState({});
   const [temp, setTemp] = useState('');
   const [currentCondition, setCurrentCondition] = useState('');
 
@@ -79,16 +80,21 @@ function App() {
           setCity('');
           if (typeof weather.main != "undefined"){
           setTemp(weather.main.temp);
-          setCurrentCondition(weather.weather[0].main);
+          setCurrentCondition(weather.weather[0].description);
           } else {
-            setTemp('75');
-            setCurrentCondition('Sunny with a high of');
+            setTemp('0');
+            setCurrentCondition('Error - Invalid city name');
             getBackground('Clear');
           };
-          console.log({weather});
           
         });
-        
+        fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}&cnt=8`)
+      .then(res =>
+        res.json())
+        .then(result => {
+          setForecast(result);
+        });
+      
       }
     };
       const getBackground = (c) =>  {
@@ -112,6 +118,7 @@ function App() {
           return 'app snow';
         } else return 'app fog'
       };
+
   return (
     <div className={(typeof weather.main != "undefined") ? getBackground (weather.weather[0].main) : 'app sunny'}>
       <main>
