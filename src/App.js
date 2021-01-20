@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const api = {
   key: "fd25d9fc51079308797eba529304b260",
@@ -21,7 +21,7 @@ function App() {
   // const [background, setBackground] = useState('');
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({
-    
+
     "coord": {
       "lon": -74.006,
       "lat": 40.7143
@@ -63,85 +63,91 @@ function App() {
     "id": 5128581,
     "name": "New York",
     "cod": 200
-    
+
   });
-  const [forecast, setForecast] = useState({});
   const [temp, setTemp] = useState('');
   const [currentCondition, setCurrentCondition] = useState('');
+  const [forecast, setForecast] = useState({});
 
-  
+
   const fetchWeather = (evt) => {
-    if (evt.key === "Enter") { 
+    if (evt.key === "Enter") {
       fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}`)
-      .then(res =>
-        res.json())
+        .then(res =>
+          res.json())
         .then(result => {
           setWeather(result);
           setCity('');
-          if (typeof weather.main != "undefined"){
-          setTemp(weather.main.temp);
-          setCurrentCondition(weather.weather[0].description);
+          if (typeof weather.main != "undefined") {
+            setTemp(weather.main.temp);
+            setCurrentCondition(weather.weather[0].description);
           } else {
             setTemp('0');
             setCurrentCondition('Error - Invalid city name');
             getBackground('Clear');
           };
-          
+
         });
-        fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}&cnt=8`)
-      .then(res =>
-        res.json())
+      fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}&cnt=8`)
+        .then(res =>
+          res.json())
         .then(result => {
           setForecast(result);
         });
 
-        
-      
+
+
+    }
+  };
+  const getBackground = (c) => {
+    if (c === "Clear") {
+      return 'app sunny';
+    } else if (c === "Clouds") {
+      if (typeof weather.main != "undefined" && weather.weather[0].id > 802) {
+        return 'app cloudy';
+      } else {
+        return 'app partlyCloudy';
       }
-    };
-      const getBackground = (c) =>  {
-        if (c === "Clear"){
-          return 'app sunny';
-        } else if( c === "Clouds"){
-          if (typeof weather.main != "undefined" && weather.weather[0].id > 802){
-            return 'app cloudy';
-          } else {
-            return 'app partlyCloudy';
-          }
-        }else if(c === "Rain" || c === "Drizzle"){
-          if (typeof weather.main != "undefined" && weather.main.temp > 55){
-            return 'app warmRain'
-          } else {
-          return 'app coldRain';
-          }
-        }else if(c === "Thunderstorm"){
-          return 'app thunder';
-        }else if(c === "Snow"){
-          return 'app snow';
-        } else return 'app fog'
-      };
+    } else if (c === "Rain" || c === "Drizzle") {
+      if (typeof weather.main != "undefined" && weather.main.temp > 55) {
+        return 'app warmRain'
+      } else {
+        return 'app coldRain';
+      }
+    } else if (c === "Thunderstorm") {
+      return 'app thunder';
+    } else if (c === "Snow") {
+      return 'app snow';
+    } else return 'app fog'
+  };
 
   return (
-    <div className={(typeof weather.main != "undefined") ? getBackground (weather.weather[0].main) : 'app sunny'}>
+    <div>
       <main>
-        <div className="date-box">
-          <div className='date'>{dateBuilder (new Date())}</div>
-        </div>
-        <div className="weather-box">
-          <div className='location'>{weather.name}</div>
-          <div className="temp">{Math.round(temp)}°</div>
-          <div className="conditions" >{currentCondition}</div>
-        </div>
+        <div className={(typeof weather.main != "undefined") ? getBackground(weather.weather[0].main) : 'app sunny'}>
+
+          <div className="date-box">
+            <div className='date'>{dateBuilder(new Date())}</div>
+          </div>
+          <div className="weather-box">
+            <div className='location'>{weather.name}</div>
+            <div className="temp">{Math.round(temp)}°</div>
+            <div className="conditions" >{currentCondition}</div>
+          </div>
+          <div className="forecast-box">
+            <div className="3hr"></div>
+          </div>
 
 
-        <input
-        type="text"
-        className="search"
-        placeholder="Search City"
-        onChange={e => setCity(e.target.value)}
-        value={city}
-        onKeyPress={fetchWeather}
-        />
+          <input
+            type="text"
+            className="search"
+            placeholder="Search City"
+            onChange={e => setCity(e.target.value)}
+            value={city}
+            onKeyPress={fetchWeather}
+          />
+        </div>
       </main>
     </div>
   );
