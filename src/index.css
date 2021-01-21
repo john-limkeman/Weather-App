@@ -62,8 +62,23 @@ main{
   left: 50px;
   right: 50px;
   border-radius: 5px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.hr{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%
+}
+
+.forecast-box span{
+  justify-self: right;
+}
 
 .search{
   position: absolute;

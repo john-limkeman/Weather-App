@@ -17,6 +17,20 @@ const dateBuilder = (d) => {
 
 }
 
+const timeBuilder = (d) => {
+  let hours = d.getHours() + 1;
+  if (hours > 11 && hours < 24) { //PM
+    if (hours > 12) {
+      hours = hours - 12;
+    }
+    return `${hours}:00 PM`
+  }
+  else { //AM
+    if (hours == 24) {
+      hours = hours - 12;
+    } return `${hours}:00 AM`
+  }
+}
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({
@@ -386,10 +400,11 @@ function App() {
     }
   }
   const fetchForecast = () => {
-    fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}&cnt=8`)
+    fetch(`${api.base}forecast?q=${city}&units=imperial&APPID=${api.key}&cnt=8`)
       .then(res =>
         res.json())
       .then(result => {
+        console.log(result);
         setForecast(result);
       });
   };
@@ -414,7 +429,9 @@ function App() {
       return 'app snow';
     } else return 'app fog'
   };
-
+ const getWeatherIcon = (w) => {
+   //add weather icons to assets and then return their img address.
+ }
   return (
     <div>
       <div className={(typeof weather.main != "undefined") ? getBackground(weather.weather[0].main) : 'app sunny'}>
@@ -423,42 +440,62 @@ function App() {
           <div className="date-box">
             <div className='date'>{dateBuilder(new Date())}</div>
           </div>
+
+
           <div className="weather-box">
             <div className='location'>{weather.name}</div>
             <div className="temp">{Math.round(weather.main.temp)}°</div>
             <div className="conditions" >{weather.weather[0].description}</div>
           </div>
-          <div className="forecast-box"> Forecast here
-            <div className="3hr" value={forecast.list[0]}>
-              <span>{Math.round(forecast.list[0].main.temp)}</span>
-              <span>{forecast.list[0].weather.main}</span>
+
+
+          <div className="forecast-box">
+            <div className="hr" value={forecast.list[0]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[0].dt * 1000))}
+              </div>
+              <span>{Math.round(forecast.list[0].main.temp)}°</span>
+              <p>{forecast.list[0].weather.main}</p>
             </div>
-            <div className="6hr" value={forecast.list[1]}>
-              <span>{Math.round(forecast.list[1].main.temp)}</span>
+            <div className="hr" value={forecast.list[1]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[1].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[1].main.temp)}°</span>
               <span>{forecast.list[1].weather.main}</span>
             </div>
-            <div className="9hr" value={forecast.list[2]}>
-              <span>{Math.round(forecast.list[2].main.temp)}</span>
+            <div className="hr" value={forecast.list[2]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[2].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[2].main.temp)}°</span>
               <span>{forecast.list[2].weather.main}</span>
             </div>
-            <div className="12hr" value={forecast.list[3]}>
-              <span>{Math.round(forecast.list[3].main.temp)}</span>
+            <div className="hr" value={forecast.list[3]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[3].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[3].main.temp)}°</span>
               <span>{forecast.list[3].weather.main}</span>
             </div>
-            <div className="15hr" value={forecast.list[4]}>
-              <span>{Math.round(forecast.list[4].main.temp)}</span>
-              <span>{forecast.list[4].weather.main}</span>
+            <div className="hr" value={forecast.list[4]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[4].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[4].main.temp)}°</span>
+              <h6>{forecast.list[4].weather.main}</h6>
             </div>
-            <div className="18hr" value={forecast.list[5]}>
-              <span>{Math.round(forecast.list[5].main.temp)}</span>
+            <div className="hr" value={forecast.list[5]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[5].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[5].main.temp)}°</span>
               <span>{forecast.list[5].weather.main}</span>
             </div>
-            <div className="21hr" value={forecast.list[6]}>
-              <span>{Math.round(forecast.list[6].main.temp)}</span>
+            <div className="hr" value={forecast.list[6]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[6].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[6].main.temp)}°</span>
               <span>{forecast.list[6].weather.main}</span>
             </div>
-            <div className="24hr" value={forecast.list[7]}>
-              <span>{Math.round(forecast.list[7].main.temp)}</span>
+            <div className="hr" value={forecast.list[7]}>
+              <div className="forecastTime">{timeBuilder(new Date(forecast.list[7].dt * 1000))}
+              </div>
+            <span>{Math.round(forecast.list[7].main.temp)}°</span>
               <span>{forecast.list[7].weather.main}</span>
             </div>
           </div>
