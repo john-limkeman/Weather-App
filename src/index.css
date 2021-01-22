@@ -7,6 +7,7 @@
   background-color: green;
   background-size: cover;
   background-position: bottom;
+  font-family:'Courier New', Courier, monospace
 }
 
 main{
@@ -19,7 +20,6 @@ main{
 .date{
   text-align: center;
   font-size: 25px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 5px;
   background-color: rgba(0,0,0,0.5);
 }
@@ -34,7 +34,6 @@ main{
 .location{
   text-align: center;
   font-size: 40px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 5px;
 }
 .temp{
@@ -62,6 +61,7 @@ main{
   left: 50px;
   right: 50px;
   border-radius: 5px;
+  padding: 10px;
 
   display: flex;
   flex-wrap: wrap;
@@ -84,7 +84,7 @@ main{
 .forecast-box img{
   width: 30px;
   height: auto;
-  margin-right: 7px;;
+  margin-right: 7px;
 }
 
 .search{
@@ -114,7 +114,7 @@ main{
 
 
 .sunny{
-  background-image: url('./assets/weather-sunny.jpg');
+  background-image: url('./assets/clear-sky.jpg');
 }
 .cloudy{
   background-image: url('./assets/weather-cloudy.jpg');
