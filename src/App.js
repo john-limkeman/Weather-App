@@ -1,4 +1,16 @@
 import React, { useState } from 'react';
+import cloudyIcon from './assets/weather-icons/cloudy-icon.png';
+import cloudyMoonIcon from './assets/weather-icons/cloudyMoon-icon.png';
+import fogIcon from './assets/weather-icons/fog-icon.png';
+import moonIcon from './assets/weather-icons/half-moon-icon.png';
+import partlySunnyIcon from './assets/weather-icons/partlySunny-icon.png';
+import rainIcon from './assets/weather-icons/rain-icon.png';
+import snowIcon from './assets/weather-icons/snow-icon.png';
+import sunnyIcon from './assets/weather-icons/sunny-icon.png';
+import thunderIcon from './assets/weather-icons/thunder-icon.png';
+import windyIcon from './assets/weather-icons/windy-icon.png';
+
+
 
 const api = {
   key: "fd25d9fc51079308797eba529304b260",
@@ -26,7 +38,7 @@ const timeBuilder = (d) => {
     return `${hours}:00 PM`
   }
   else { //AM
-    if (hours == 24) {
+    if (hours === 24) {
       hours = hours - 12;
     } return `${hours}:00 AM`
   }
@@ -429,9 +441,33 @@ function App() {
       return 'app snow';
     } else return 'app fog'
   };
- const getWeatherIcon = (w) => {
-   //add weather icons to assets and then return their img address.
- }
+  const getWeatherIcon = (w) => {
+    let condition = forecast.list[w].weather[0].id;
+    let time = new Date(forecast.list[w].dt * 1000);
+    let hour = time.getHours();
+
+    if (condition >= 200 && condition < 300) {
+      return thunderIcon;
+    } else if (condition >= 300 && condition < 600) {
+      return rainIcon;
+    } else if (condition >= 600 && condition < 700) {
+      return snowIcon;
+    } else if (condition >= 700 && condition < 770) {
+      return fogIcon;
+    } else if (condition === 771 || condition === 781) {
+      return windyIcon;
+    } else if (condition === 800) {
+      if (hour < 6 || hour > 18) {
+        return moonIcon;
+      } else return sunnyIcon;
+    } else if (condition === 801 || condition === 802) {
+      if (hour < 6 || hour > 18) {
+        return cloudyMoonIcon;
+      } else return partlySunnyIcon;
+    } else {
+      return cloudyIcon;
+    }
+  }
   return (
     <div>
       <div className={(typeof weather.main != "undefined") ? getBackground(weather.weather[0].main) : 'app sunny'}>
@@ -450,53 +486,55 @@ function App() {
 
 
           <div className="forecast-box">
+
+
             <div className="hr" value={forecast.list[0]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[0].dt * 1000))}
               </div>
               <span>{Math.round(forecast.list[0].main.temp)}°</span>
-              <p>{forecast.list[0].weather.main}</p>
+              <img src={getWeatherIcon(0)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[1]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[1].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[1].main.temp)}°</span>
-              <span>{forecast.list[1].weather.main}</span>
+              <span>{Math.round(forecast.list[1].main.temp)}°</span>
+              <img src={getWeatherIcon(1)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[2]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[2].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[2].main.temp)}°</span>
-              <span>{forecast.list[2].weather.main}</span>
+              <span>{Math.round(forecast.list[2].main.temp)}°</span>
+              <img src={getWeatherIcon(2)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[3]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[3].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[3].main.temp)}°</span>
-              <span>{forecast.list[3].weather.main}</span>
+              <span>{Math.round(forecast.list[3].main.temp)}°</span>
+              <img src={getWeatherIcon(3)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[4]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[4].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[4].main.temp)}°</span>
-              <h6>{forecast.list[4].weather.main}</h6>
+              <span>{Math.round(forecast.list[4].main.temp)}°</span>
+              <img src={getWeatherIcon(4)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[5]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[5].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[5].main.temp)}°</span>
-              <span>{forecast.list[5].weather.main}</span>
+              <span>{Math.round(forecast.list[5].main.temp)}°</span>
+              <img src={getWeatherIcon(5)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[6]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[6].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[6].main.temp)}°</span>
-              <span>{forecast.list[6].weather.main}</span>
+              <span>{Math.round(forecast.list[6].main.temp)}°</span>
+              <img src={getWeatherIcon(6)} alt="weather icon" />
             </div>
             <div className="hr" value={forecast.list[7]}>
               <div className="forecastTime">{timeBuilder(new Date(forecast.list[7].dt * 1000))}
               </div>
-            <span>{Math.round(forecast.list[7].main.temp)}°</span>
-              <span>{forecast.list[7].weather.main}</span>
+              <span>{Math.round(forecast.list[7].main.temp)}°</span>
+              <img src={getWeatherIcon(7)} alt="weather icon" />
             </div>
           </div>
 

@@ -73,11 +73,18 @@ main{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%
+  align-items:center;
+  width: 100%;
 }
 
 .forecast-box span{
   justify-self: right;
+}
+
+.forecast-box img{
+  width: 30px;
+  height: auto;
+  margin-right: 7px;;
 }
 
 .search{
