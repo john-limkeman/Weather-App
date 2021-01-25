@@ -13,7 +13,7 @@ import windyIcon from './assets/weather-icons/windy-icon.png';
 
 
 const api = {
-  key: "fd25d9fc51079308797eba529304b260",
+  key: "fd25d9fc51079308797eba529304b260", //using free service available to public -- key should probably still be hidden.
   base: "https://api.openweathermap.org/data/2.5/"
 }
 const dateBuilder = (d) => {
