@@ -13,7 +13,7 @@ import windyIcon from './assets/weather-icons/windy-icon.png';
 
 
 const api = {
-  key: "", //API not on github
+  key: "", //API key not on github
   base: "https://api.openweathermap.org/data/2.5/"
 }
 const dateBuilder = (d) => {
