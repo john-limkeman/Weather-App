@@ -394,7 +394,6 @@ function App() {
 
 
   const fetchWeather = (evt) => {
-    console.log(api.key);
     if (evt.key === "Enter") {
       fetch(`${api.base}weather?q=${city}&units=imperial&APPID=${api.key}`)
         .then(res =>
@@ -473,7 +472,7 @@ function App() {
       <div className={(typeof weather.main != "undefined") ? getBackground(weather.weather[0].main) : 'app sunny'}>
         <main>
 
-          {/* <div className="date-box">
+          <div className="date-box">
             <div className='date'>{dateBuilder(new Date())}</div>
           </div>
 
@@ -536,7 +535,7 @@ function App() {
               <span>{Math.round(forecast.list[7].main.temp)}°</span>
               <img src={getWeatherIcon(7)} alt="weather icon" />
             </div>
-          </div> */}
+          </div>
 
 
           <input
