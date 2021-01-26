@@ -9,7 +9,10 @@ import snowIcon from './assets/weather-icons/snow-icon.png';
 import sunnyIcon from './assets/weather-icons/sunny-icon.png';
 import thunderIcon from './assets/weather-icons/thunder-icon.png';
 import windyIcon from './assets/weather-icons/windy-icon.png';
+import dotenv from "dotenv";
 
+
+dotenv.config();
 
 const api = {
   key: process.env.REACT_APP_API_KEY,
