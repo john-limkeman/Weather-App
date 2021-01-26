@@ -9,11 +9,11 @@ import snowIcon from './assets/weather-icons/snow-icon.png';
 import sunnyIcon from './assets/weather-icons/sunny-icon.png';
 import thunderIcon from './assets/weather-icons/thunder-icon.png';
 import windyIcon from './assets/weather-icons/windy-icon.png';
-
+import config from '../config.js';
 
 
 const api = {
-  key: "fd25d9fc51079308797eba529304b260",
+  key: config.API_KEY,
   base: "https://api.openweathermap.org/data/2.5/"
 }
 const dateBuilder = (d) => {
